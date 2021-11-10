@@ -1,11 +1,13 @@
 package com.project.recyclerview_example.view
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.recyclerview_example.R
 import com.project.recyclerview_example.model.RestauranteVO
+import com.project.recyclerview_example.viewmodel.RestaurantListViewModel
 
 class RestaurantListActivity : AppCompatActivity() {
 
@@ -18,16 +20,14 @@ class RestaurantListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mockRestaurant()
+        setupViewModel()
         setupAdapter()
+
     }
 
-    private fun mockRestaurant() {
-        restaurantList.add(RestauranteVO("Yamato", "Japonesa"))
-        restaurantList.add(RestauranteVO("Vila Mex", "Mexicana"))
-        restaurantList.add(RestauranteVO("Zensei", "Japonesa"))
-        restaurantList.add(RestauranteVO("Hanover", "Fondue"))
-        restaurantList.add(RestauranteVO("Portal da Coreia", "Coreia"))
+    private fun setupViewModel() {
+        val restaurantViewModel: RestaurantListViewModel by viewModels()
+        restaurantList = restaurantViewModel.getRestaurants()
     }
 
     private fun setupAdapter() {
